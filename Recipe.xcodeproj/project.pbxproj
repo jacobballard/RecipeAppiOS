@@ -14,9 +14,10 @@
 		82D5089E29387D3600871AA7 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82D5089D29387D3600871AA7 /* Login.swift */; };
 		82D508A02938809900871AA7 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82D5089F2938809900871AA7 /* AuthViewModel.swift */; };
 		82D508A229392E6600871AA7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 82D508A129392E6600871AA7 /* GoogleService-Info.plist */; };
-		82D508A52939310500871AA7 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 82D508A42939310500871AA7 /* FirebaseAuth */; };
-		82D508A72939310500871AA7 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 82D508A62939310500871AA7 /* FirebaseFirestore */; };
 		82D508AA293932A300871AA7 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 82D508A9293932A300871AA7 /* .gitignore */; };
+		82D508B5293AA32800871AA7 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 82D508B4293AA32800871AA7 /* FirebaseAuth */; };
+		82D508B7293AA34B00871AA7 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 82D508B6293AA34B00871AA7 /* FirebaseFirestoreSwift */; };
+		82D508B9293AA65F00871AA7 /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 82D508B8293AA65F00871AA7 /* FirebaseAuthCombine-Community */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,8 +37,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				82D508A52939310500871AA7 /* FirebaseAuth in Frameworks */,
-				82D508A72939310500871AA7 /* FirebaseFirestore in Frameworks */,
+				82D508B5293AA32800871AA7 /* FirebaseAuth in Frameworks */,
+				82D508B9293AA65F00871AA7 /* FirebaseAuthCombine-Community in Frameworks */,
+				82D508B7293AA34B00871AA7 /* FirebaseFirestoreSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -49,6 +51,7 @@
 			children = (
 				82D508892934157B00871AA7 /* Recipe */,
 				82D508882934157B00871AA7 /* Products */,
+				82D508AB29393CEF00871AA7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -131,6 +134,13 @@
 			path = Git;
 			sourceTree = "<group>";
 		};
+		82D508AB29393CEF00871AA7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -148,8 +158,9 @@
 			);
 			name = Recipe;
 			packageProductDependencies = (
-				82D508A42939310500871AA7 /* FirebaseAuth */,
-				82D508A62939310500871AA7 /* FirebaseFirestore */,
+				82D508B4293AA32800871AA7 /* FirebaseAuth */,
+				82D508B6293AA34B00871AA7 /* FirebaseFirestoreSwift */,
+				82D508B8293AA65F00871AA7 /* FirebaseAuthCombine-Community */,
 			);
 			productName = Recipe;
 			productReference = 82D508872934157B00871AA7 /* Recipe.app */;
@@ -427,15 +438,20 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		82D508A42939310500871AA7 /* FirebaseAuth */ = {
+		82D508B4293AA32800871AA7 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 82D508A32939310500871AA7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAuth;
 		};
-		82D508A62939310500871AA7 /* FirebaseFirestore */ = {
+		82D508B6293AA34B00871AA7 /* FirebaseFirestoreSwift */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 82D508A32939310500871AA7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseFirestore;
+			productName = FirebaseFirestoreSwift;
+		};
+		82D508B8293AA65F00871AA7 /* FirebaseAuthCombine-Community */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 82D508A32939310500871AA7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = "FirebaseAuthCombine-Community";
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
