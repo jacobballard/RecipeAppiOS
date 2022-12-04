@@ -31,9 +31,7 @@ final class AuthViewModel : ObservableObject {
 //            .map { $0 != nil }
 //            .assign(to: &$isSignedIn)
         
-        Auth.auth().signIn(withEmail: email,
-                           
-                           password: password)
+        Auth.auth().signIn(withEmail: email, password: password)
             .map { $0.user }
             .sink { [weak self] res in
                 self?.isSignedIn = true
@@ -50,6 +48,7 @@ final class AuthViewModel : ObservableObject {
                 self?.isSignedIn = true
             } receiveValue: { [weak self] userIn in
                 self?.user = userIn
+
             }
             .store(in: &bag)
             
