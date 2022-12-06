@@ -6,11 +6,11 @@
 //
 
 import Foundation
-import FirebaseCore
-import FirebaseFirestore
-import FirebaseFirestoreCombineSwift
+import SwiftUI
 
-final class Recipe : Codable, ObservableObject {
+
+
+final class Recipe : Codable, ObservableObject, Identifiable {
 
 
 
@@ -33,7 +33,15 @@ final class Recipe : Codable, ObservableObject {
         case image
         
     }
-
+    
+    init(title : String, ingredients : [String], instructions : [String], tags : [String]) {
+        self.title = title
+        self.ingredients = ingredients
+        self.instructions = instructions
+        self.tags = tags
+        self.image = nil
+        
+    }
     required init(from decoder: Decoder) throws {
         
         let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -56,3 +64,12 @@ final class Recipe : Codable, ObservableObject {
         
     }
 }
+
+
+// For debug
+
+let testRecipes = [
+    Recipe(title: "Kimchi", ingredients: ["ONion", "Garlic", "Goruchan (?) Koren Chili Flakes", "Rice Vinegar", "Cabbage", "Raddish", "Water", "Green Onion", "Salt"], instructions: ["Mix ingredients in jar and put in fridge"], tags: ["Korean", "Side", "Sauce and Condiment"]),
+    Recipe(title: "Shepherd's Pie", ingredients: ["Lamb or Ground Beef", "Thyme", "Rosemary",  "Peas and Carrots", "Tomato Paste", "Garlic", "Onion", "Cooking oil", "Potatoes", "butten", "salt and pepper", "Flour", "Beef stock", "Red wine (optional)", "Parmesean :)"], instructions: ["Brown meat", "Add onion and garlic", "Stir in tomatoe paste", "deglaze and let beef simmer", "add spices", "make potatoes simultaneously", "mix in spices and cheese and cook in the over"  ], tags: ["English", "Dinner", "Meal"]),
+    Recipe(title: "Cereal Milk", ingredients: ["Milk", "cereal"], instructions: ["mix together and soak", "strain milk and use"], tags: ["dessert", "ingredient"])
+]
