@@ -7,15 +7,17 @@
 
 import SwiftUI
 
+
 struct ContentView: View {
+    
+    @EnvironmentObject var user : UserModel
+    
     var body: some View {
-        VStack {
-            Text("Login").font(.system(size: 40))
-            Spacer()
-            
-            
+        if user.isSignedIn {
+            // Home View
+        } else {
+            Login()
         }
-        .padding()
     }
 }
 

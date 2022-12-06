@@ -26,11 +26,20 @@ final class UserModel : ObservableObject {
         
         // call change listener
         
-        // load till we know fo sure
-        
-        // set internal values
-        
-        // handle at root
+        Auth.auth().authStateDidChangePublisher()
+            .sink { result in
+                
+                
+                self.user = result ?? nil
+                
+                if self.user == nil {
+                    self.isSignedIn = false
+                    
+                } else {
+                    self.isSignedIn = true
+                }
+            }
+            .store(in: &bag)
     }
     
     func signInWithEmail(email : String, password : String) {

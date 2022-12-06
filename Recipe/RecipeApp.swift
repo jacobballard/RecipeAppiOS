@@ -22,9 +22,12 @@ struct RecipeApp: App {
     
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
+    let user = UserModel()
+    
     var body: some Scene {
+        
         WindowGroup {
-            ContentView()
+            ContentView().environmentObject(user)
         }
     }
 }

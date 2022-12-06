@@ -9,7 +9,7 @@ import SwiftUI
 
 struct Login: View {
     
-    @EnvironmentObject var authVM : AuthViewModel
+    @EnvironmentObject var user : UserModel
     
     @State private var email : String = ""
     @State private var password : String = ""
@@ -25,7 +25,7 @@ struct Login: View {
             SecureField("password", text: $password).padding()
             
             Button(action: {
-                
+                user.signInWithEmail(email: email, password: password)
             }) {
                 Text("Log In")
             }.padding().background(Color(.systemBlue)).foregroundColor(.white)
