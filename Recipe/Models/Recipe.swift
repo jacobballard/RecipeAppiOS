@@ -7,13 +7,14 @@
 
 import Foundation
 import SwiftUI
-
+import FirebaseFirestore
+import FirebaseFirestoreSwift
 
 
 final class Recipe : Codable, ObservableObject, Identifiable {
 
-
-
+    @DocumentID var id : String?
+    
     @Published var title : String?
 
     @Published var ingredients : [String]?
