@@ -17,8 +17,7 @@ struct SearchView: View {
             
             
             
-        }.searchable(text: <#T##Binding<String>#>)
-        
+        }.toolbar(content: )
     }
 }
 
