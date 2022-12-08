@@ -22,6 +22,7 @@
 		82D508BF293E8DDB00871AA7 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82D508BE293E8DDB00871AA7 /* Recipe.swift */; };
 		82D508C1293E949500871AA7 /* RecipeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82D508C0293E949500871AA7 /* RecipeList.swift */; };
 		82D508C329409CCE00871AA7 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82D508C229409CCE00871AA7 /* SearchView.swift */; };
+		82D508C6294293C700871AA7 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82D508C5294293C700871AA7 /* SearchViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		82D508BE293E8DDB00871AA7 /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
 		82D508C0293E949500871AA7 /* RecipeList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeList.swift; sourceTree = "<group>"; };
 		82D508C229409CCE00871AA7 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		82D508C5294293C700871AA7 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +76,7 @@
 		82D508892934157B00871AA7 /* Recipe */ = {
 			isa = PBXGroup;
 			children = (
+				82D508C4294293B300871AA7 /* ViewModels */,
 				82D508A82939328900871AA7 /* Git */,
 				82D508A129392E6600871AA7 /* GoogleService-Info.plist */,
 				82D5089B2936B37C00871AA7 /* Models */,
@@ -143,6 +146,14 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		82D508C4294293B300871AA7 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				82D508C5294293C700871AA7 /* SearchViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -231,6 +242,7 @@
 				82D508BD293DB65400871AA7 /* HomeView.swift in Sources */,
 				82D508C329409CCE00871AA7 /* SearchView.swift in Sources */,
 				82D508BB293D358300871AA7 /* User.swift in Sources */,
+				82D508C6294293C700871AA7 /* SearchViewModel.swift in Sources */,
 				82D5088B2934157B00871AA7 /* RecipeApp.swift in Sources */,
 				82D508C1293E949500871AA7 /* RecipeList.swift in Sources */,
 			);
