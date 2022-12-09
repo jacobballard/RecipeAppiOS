@@ -25,21 +25,21 @@ final class UserModel : ObservableObject {
     init() {
         
         // call change listener
-        
-        Auth.auth().authStateDidChangePublisher()
-            .sink { result in
-                
-                
-                self.user = result ?? nil
-                
-                if self.user == nil {
-                    self.isSignedIn = false
-                    
-                } else {
-                    self.isSignedIn = true
-                }
-            }
-            .store(in: &bag)
+        print("test")
+//        Auth.auth().authStateDidChangePublisher()
+//            .sink { result in
+//
+//
+//                self.user = result ?? nil
+//
+//                if self.user == nil {
+//                    self.isSignedIn = false
+//
+//                } else {
+//                    self.isSignedIn = true
+//                }
+//            }
+//            .store(in: &bag)
     }
     
     func signInWithEmail(email : String, password : String) {

@@ -13,11 +13,13 @@ struct ContentView: View {
     @EnvironmentObject var user : UserModel
     
     var body: some View {
-        if user.isSignedIn {
-            // Home View
-        } else {
-            Login()
-        }
+//        if user.isSignedIn {
+//            // Home View
+//        } else {
+//            Login()
+//        }
+        
+        Text("")
     }
 }
 

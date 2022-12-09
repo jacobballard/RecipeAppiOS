@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SearchView: View {
     
-    @EnvironmentObject var recipeList : RecipeList
+//    @EnvironmentObject var recipeList : RecipeList
     
     // Environment or DI?
     var body: some View {
@@ -17,7 +17,7 @@ struct SearchView: View {
             
             
             
-        }.toolbar(content: )
+        }
     }
 }
 
