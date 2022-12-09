@@ -7,12 +7,16 @@
 
 import Foundation
 
-struct SearchItem : Hashable {
+struct SearchItem : Hashable, Identifiable {
+    
+    var id = UUID()
+    
     
     var text : String
     
     init(text : String) {
         self.text = text
+        
     }
     
 }

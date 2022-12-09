@@ -6,12 +6,12 @@
 //
 
 import SwiftUI
-
+import Foundation
 
 struct SearchItemView: View {
     
     
-    @State var data : Set = [
+    @State var data = [
         SearchItem(text:"Beatles"),
         SearchItem(text:"Pearl Jam"),
         SearchItem(text:"REM"),
@@ -33,7 +33,11 @@ struct SearchItemView: View {
             alignment: .leading
         ) { item in
             Button {
-                data.remove(item)
+                
+                // MARK : UPDATE
+                if let index = data.firstIndex(of: item) {
+                    data.remove(at: index)
+                }
             } label: {
                 
                 
