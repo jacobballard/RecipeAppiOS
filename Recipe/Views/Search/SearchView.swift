@@ -17,57 +17,63 @@ struct SearchView: View {
     
     var body: some View {
         
-//        NavigationView {
-//
-//            List {
-//                ForEach(0..<30) { item in
-//                    Text("test")
-//                }
-//            }
-//            .safeAreaInset(edge: .top, content: {
-//                if viewModel.searchTerms.count != 0 {
-//                    SearchItemsView()
-//                }
-//
-//            })
-//            .toolbar {
-//
-//
-//
-//                ToolbarItem(placement: .principal, content: {
-//                    TextField("Search", text: $currentTerm)
-//                    SearchItemsView()
-//                })
-//
-//
-//            }
-//            .toolbarRole(.navigationStack)
-//            .navigationBarTitleDisplayMode(.inline)
-//
-//
-//
-//        }
-//        }.searchable(text: $currentTerm, placement: .toolbar)
-        
-        
-        NavigationView {
-            ScrollView {
+        ScrollView {
+            ZStack {
                 VStack {
-                    SearchItemsView()
-
-                    LazyVStack {
-                        ForEach(0..<100) { number in
-                            Text("\(number)")
+                    ForEach(0..<30) { item in
+                        GroupBox {
+                            
+                            VStack(alignment: .leading) {
+                                Text("Item \(item)")
+                                
+                            }
+                            
+                            
+                            
+                        } label: {
+                            Text("Item").font(.title2)
                         }
                     }
                 }
+                .padding(.top, 120)
+
+                GeometryReader { geoProxy in
+                    SearchHeaderView(searchTerm: $currentTerm)
+                }
+                .frame(maxWidth: .infinity)
+//                .frame(height: self.)
             }
-        }.searchable(text: $currentTerm)
+        }//.searchable(text: $currentTerm, placement: .toolbar)
+        
+        
+//        NavigationView {
+//            ScrollView {
+//                VStack {
+//                    SearchItemsView()
+//
+//                    LazyVStack {
+//                        ForEach(0..<100) { number in
+//                            Text("\(number)")
+//                        }
+//                    }
+//                }
+//            }
+//        }.searchable(text: $currentTerm)
         
 //            Text("dang")
             
         
         
+    }
+    
+    func getHeight(minHeight: CGFloat, maxHeight: CGFloat, yOffset: CGFloat) -> CGFloat {
+        // scrolling up
+        if maxHeight + yOffset < minHeight {
+            return minHeight
+        }
+        
+        // scrolling down
+        return maxHeight + yOffset
     }
 }
 

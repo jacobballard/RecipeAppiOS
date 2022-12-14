@@ -29,6 +29,7 @@
 		82D508E32942AB1600871AA7 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 82D508E22942AB1600871AA7 /* FirebaseFirestoreSwift */; };
 		82D508E52942AF8800871AA7 /* SearchItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82D508E42942AF8800871AA7 /* SearchItem.swift */; };
 		82D508E72942EBA900871AA7 /* RecipeCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82D508E62942EBA900871AA7 /* RecipeCellView.swift */; };
+		82D508E9294925AA00871AA7 /* SearchHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82D508E8294925AA00871AA7 /* SearchHeaderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		82D508CA294299FE00871AA7 /* SearchItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchItemView.swift; sourceTree = "<group>"; };
 		82D508E42942AF8800871AA7 /* SearchItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchItem.swift; sourceTree = "<group>"; };
 		82D508E62942EBA900871AA7 /* RecipeCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCellView.swift; sourceTree = "<group>"; };
+		82D508E8294925AA00871AA7 /* SearchHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHeaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,6 +178,7 @@
 				82D508C229409CCE00871AA7 /* SearchView.swift */,
 				82D508C7294299DC00871AA7 /* SearchItemsView.swift */,
 				82D508CA294299FE00871AA7 /* SearchItemView.swift */,
+				82D508E8294925AA00871AA7 /* SearchHeaderView.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -269,6 +272,7 @@
 				82D508BD293DB65400871AA7 /* HomeView.swift in Sources */,
 				82D508C329409CCE00871AA7 /* SearchView.swift in Sources */,
 				82D508C8294299DC00871AA7 /* SearchItemsView.swift in Sources */,
+				82D508E9294925AA00871AA7 /* SearchHeaderView.swift in Sources */,
 				82D508BB293D358300871AA7 /* User.swift in Sources */,
 				82D508C6294293C700871AA7 /* SearchViewModel.swift in Sources */,
 				82D508CB294299FE00871AA7 /* SearchItemView.swift in Sources */,
