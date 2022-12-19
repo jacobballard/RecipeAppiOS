@@ -14,21 +14,29 @@ struct SearchHeaderView: View {
     @EnvironmentObject var viewModel : SearchViewModel
     
     var body: some View {
-        VStack {
+        
+        GeometryReader { geoProxy in
+            VStack {
             
-            
-            HStack {
-                Image(systemName: "magnifyingglass")
-                TextField("Search", text: searchTerm).foregroundColor(.white)
+                
+                
+                ZStack {
+                    HStack {
+                        Image(systemName: "magnifyingglass")
+                            .resizable()
+                        
+                        TextField("Search again", text: searchTerm)
+                    }
+                }
+                .padding()
+                .background(Color(.systemGray5), alignment: .center)
+                .overlay(RoundedRectangle(cornerRadius: 10).background(Color(.systemGray2))).foregroundColor(.white)
+                
+                
+                if viewModel.searchTerms.count > 0 {
+                    SearchItemsView()
+                }
             }
-            .padding()
-            .background(Color(.systemGray5), alignment: .center)
-            
-            
-            if viewModel.searchTerms.count > 0 {
-                SearchItemsView()
-            }
-
         }.padding()
     }
 }

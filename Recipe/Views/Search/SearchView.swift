@@ -24,7 +24,7 @@ struct SearchView: View {
                         GroupBox {
                             
                             VStack(alignment: .leading) {
-                                Text("Item \(item)")
+                                Text("Jacqueline \(item)")
                                 
                             }
                             
@@ -35,15 +35,34 @@ struct SearchView: View {
                         }
                     }
                 }
-                .padding(.top, 120)
+                .padding(.top, 180)
 
-                GeometryReader { geoProxy in
-                    SearchHeaderView(searchTerm: $currentTerm)
-                }
-                .frame(maxWidth: .infinity)
+//                GeometryReader { geoProxy in
+//                    SearchHeaderView(searchTerm: $currentTerm)
+//                }
+//                .frame(maxWidth: .infinity)
 //                .frame(height: self.)
-            }
-        }//.searchable(text: $currentTerm, placement: .toolbar)
+                
+                GeometryReader { geoProxy in
+                    VStack {
+                        Text("Search").font(.title2).bold()
+                        SearchHeaderView(searchTerm: $currentTerm)
+                    }
+                    .frame(maxWidth: .infinity)
+                    .frame(height: self.getHeight(minHeight: 80,
+                                                        maxHeight: 80,
+                                                        yOffset: geoProxy.frame(in: .global).origin.y))
+                    
+                    .background(Color.orange.opacity(0.95))
+                    .offset(y: (geoProxy.frame(in: .global).origin.y < 0 ? abs(geoProxy.frame(in: .global).origin.y) : -geoProxy.frame(in: .global).origin.y))
+                }
+            
+            
+        }
+        .edgesIgnoringSafeArea(.vertical)
+            
+        }
+        //.searchable(text: $currentTerm, placement: .toolbar)
         
         
 //        NavigationView {

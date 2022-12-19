@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		821977F8294AD06100F7662C /* DemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 821977F7294AD06100F7662C /* DemoView.swift */; };
 		82D5088B2934157B00871AA7 /* RecipeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82D5088A2934157B00871AA7 /* RecipeApp.swift */; };
 		82D5088D2934157B00871AA7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82D5088C2934157B00871AA7 /* ContentView.swift */; };
 		82D5088F2934157C00871AA7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 82D5088E2934157C00871AA7 /* Assets.xcassets */; };
@@ -33,6 +34,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		821977F7294AD06100F7662C /* DemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoView.swift; sourceTree = "<group>"; };
 		82D508872934157B00871AA7 /* Recipe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Recipe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		82D5088A2934157B00871AA7 /* RecipeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeApp.swift; sourceTree = "<group>"; };
 		82D5088C2934157B00871AA7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -179,6 +181,7 @@
 				82D508C7294299DC00871AA7 /* SearchItemsView.swift */,
 				82D508CA294299FE00871AA7 /* SearchItemView.swift */,
 				82D508E8294925AA00871AA7 /* SearchHeaderView.swift */,
+				821977F7294AD06100F7662C /* DemoView.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -278,6 +281,7 @@
 				82D508CB294299FE00871AA7 /* SearchItemView.swift in Sources */,
 				82D5088B2934157B00871AA7 /* RecipeApp.swift in Sources */,
 				82D508C1293E949500871AA7 /* RecipeList.swift in Sources */,
+				821977F8294AD06100F7662C /* DemoView.swift in Sources */,
 				82D508E72942EBA900871AA7 /* RecipeCellView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
