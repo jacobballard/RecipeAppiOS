@@ -23,14 +23,14 @@ struct SearchHeaderView: View {
                 ZStack {
                     HStack {
                         Image(systemName: "magnifyingglass")
-                            .resizable()
+                            
                         
                         TextField("Search again", text: searchTerm)
                     }
                 }
                 .padding()
                 .background(Color(.systemGray5), alignment: .center)
-                .overlay(RoundedRectangle(cornerRadius: 10).background(Color(.systemGray2))).foregroundColor(.white)
+                //.overlay(RoundedRectangle(cornerRadius: 10).background(Color(.systemGray2))).foregroundColor(.white)
                 
                 
                 if viewModel.searchTerms.count > 0 {

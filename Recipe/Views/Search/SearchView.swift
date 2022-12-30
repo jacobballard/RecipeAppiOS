@@ -49,8 +49,8 @@ struct SearchView: View {
                         SearchHeaderView(searchTerm: $currentTerm)
                     }
                     .frame(maxWidth: .infinity)
-                    .frame(height: self.getHeight(minHeight: 80,
-                                                        maxHeight: 80,
+                    .frame(height: self.getHeight(minHeight: 180,
+                                                        maxHeight: 180,
                                                         yOffset: geoProxy.frame(in: .global).origin.y))
                     
                     .background(Color.orange.opacity(0.95))
