@@ -11,6 +11,8 @@ struct SearchItemsView: View {
     
     @EnvironmentObject var viewModel : SearchViewModel
     
+    
+    
     var body: some View {
         
         
@@ -19,13 +21,12 @@ struct SearchItemsView: View {
             ScrollView(.horizontal, showsIndicators: false) {
             
                 HStack(spacing: 5) {
-                    ForEach(viewModel.searchTerms) { item in
+                    ForEach(viewModel.searchTerms.sorted(by: {$0.index <= $1.index})) { item in
                         Button {
     
                             // MARK : UPDATE
-                            if let index = viewModel.searchTerms.firstIndex(of: item) {
-                                viewModel.searchTerms.remove(at: index)
-                            }
+                            viewModel.searchTerms.remove(item)
+                          
                         } label: {
     
     
@@ -43,11 +44,11 @@ struct SearchItemsView: View {
                         }
                         .foregroundColor(.black)
                     }
-                    .onChange(of: viewModel.searchTerms.count) { _ in
-                        withAnimation {
-                            value.scrollTo(viewModel.searchTerms[viewModel.searchTerms.count - 1].id, anchor: .trailing)
-                        }
-                    }
+//                    .onChange(of: viewModel.searchTerms.count) { _ in
+//                        withAnimation {
+//                            value.scrollTo(viewModel.searchTerms[viewModel.searchTerms.count - 1].id, anchor: .trailing)
+//                        }
+//                    }
                 }
     
             }
@@ -60,17 +61,6 @@ struct SearchItemsView: View {
 
 struct SearchItemsView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchItemsView().environmentObject(SearchViewModel(searchTerms: [
-            SearchItem(text:"Beatles"),
-            SearchItem(text:"Pearl Jam"),
-            SearchItem(text:"REM"),
-            SearchItem(text:"Guns n Roses"),
-            SearchItem(text:"Red Hot Chili Peppers"),
-            SearchItem(text:"No Doubt"),
-            SearchItem(text:"Nirvana"),
-            SearchItem(text:"Tom Petty and the Heart Breakers"),
-            SearchItem(text:"The Eagles")
-           
-            ]))
+        SearchItemsView()
     }
 }

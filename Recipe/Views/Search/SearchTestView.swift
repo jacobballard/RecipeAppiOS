@@ -9,8 +9,9 @@ import SwiftUI
 
 struct SearchTestView: View {
     @State private var scrollHeight : CGFloat? = nil
-    
+    @State private var headerHeight : CGFloat? = nil
     @State private var searchTerm : String = ""
+    @EnvironmentObject var viewModel : SearchViewModel
     
     
     var body: some View {
@@ -48,21 +49,48 @@ struct SearchTestView: View {
                 }
                 
                 GeometryReader { geoProxy in
-                    VStack {
+                    VStack(spacing: 0) {
                         
-                        Color.clear.preference(key: OffsetKey.self, value: geoProxy.frame(in: .global).minY)
-                            .frame(height: 0)
+                        
                         Text("Search").font(.title)
                             .bold()
                             
-                        SearchHeaderView(searchTerm: $searchTerm).opacity(getOpacity())
+                        VStack {
+                            ZStack {
+                                HStack {
+                                    Image(systemName: "magnifyingglass")
+                                    
+                                    TextField("Search", text: $searchTerm).onSubmit {
+                                        guard searchTerm.isEmpty == false else { return }
+                                        
+                                        viewModel.searchTerms.insert(SearchItem(text: searchTerm, index: viewModel.searchTerms.count))
+                                    }
+                                }
+                            }
+                            .padding()
+                            .background(Color(.systemGray5), alignment: .center)
+                        }.padding([.leading, .trailing])
+                            .padding(.bottom, 5)
                         
+                        if viewModel.searchTerms.count > 0 {
+                            SearchItemsView().padding([.leading])
+                        }
+                        
+                        
+                            
+                            
+                        Color.clear.preference(key: HeaderKey.self, value: geoProxy.frame(in: .global).maxY)
+                            .frame(height: 0)
                     }
                     .frame(maxWidth: .infinity)
-                    .frame(height: 180 - getHeight())
+                    .frame(height: 150 - getHeight())
                     .background(Color.orange.opacity(0.25))
                     
                     
+                    
+                }.onPreferenceChange(HeaderKey.self) { (value : OffsetKey.Value) in
+                    headerHeight = value
+                    print(value ?? "none")
                 }
                 
             }
@@ -117,6 +145,6 @@ struct HeaderKey: PreferenceKey {
 
 struct SearchTestView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchTestView()
+        SearchTestView().environmentObject(SearchViewModel())
     }
 }

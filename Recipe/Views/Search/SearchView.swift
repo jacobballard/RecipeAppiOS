@@ -98,18 +98,7 @@ struct SearchView: View {
 
 struct SearchView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchView().environmentObject(SearchViewModel(searchTerms: [
-            SearchItem(text:"Beatles"),
-            SearchItem(text:"Pearl Jam"),
-            SearchItem(text:"REM"),
-            SearchItem(text:"Guns n Roses"),
-            SearchItem(text:"Red Hot Chili Peppers"),
-            SearchItem(text:"No Doubt"),
-            SearchItem(text:"Nirvana"),
-            SearchItem(text:"Tom Petty and the Heart Breakers"),
-            SearchItem(text:"The Eagles")
-
-            ]))
+        SearchView()
 //            .environmentObject(SearchViewModel(searchTerms: []))
             
     }

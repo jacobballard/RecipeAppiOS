@@ -13,7 +13,7 @@ import FirebaseFirestoreCombineSwift
 class SearchViewModel : ObservableObject {
 
 
-    @Published var searchTerms  : [SearchItem] = [SearchItem]()
+    @Published var searchTerms  : Set<SearchItem> = Set<SearchItem>()
 
     @Published var list : [Recipe]?
 
@@ -21,7 +21,7 @@ class SearchViewModel : ObservableObject {
 
     private var bag = Set<AnyCancellable>()
     
-    init(searchTerms: [SearchItem], list: [Recipe]? = nil) {
+    init(list: [Recipe]? = nil) {
         self.searchTerms = searchTerms
         self.list = list
     }
@@ -70,6 +70,8 @@ class SearchViewModel : ObservableObject {
             self.list = recipes
         }
         .store(in: &bag)
+        
+        
 
 
 //        db

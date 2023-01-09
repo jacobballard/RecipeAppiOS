@@ -11,11 +11,12 @@ struct SearchItem : Hashable, Identifiable {
     
     var id = UUID()
     
-    
+    var index : Int
     var text : String
     
-    init(text : String) {
+    init(text : String, index : Int) {
         self.text = text
+        self.index = index
         
     }
     
