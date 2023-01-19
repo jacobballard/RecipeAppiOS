@@ -10,6 +10,9 @@ import SwiftUI
 struct SearchTestView: View {
     @State private var scrollHeight : CGFloat? = nil
     @State private var headerHeight : CGFloat? = nil
+    @State private var searchFieldHeight : CGFloat? = nil
+    @State private var ingredientsHeight : CGFloat? = nil
+    
     @State private var searchTerm : String = ""
     @EnvironmentObject var viewModel : SearchViewModel
     
@@ -19,78 +22,155 @@ struct SearchTestView: View {
             
             ZStack {
 //
-                ScrollView {
-                    GeometryReader { geoProxy in
-                        Color.clear.preference(key: OffsetKey.self, value: geoProxy.frame(in: .global).minY)
-                            .frame(height: 0)
-                    }.onPreferenceChange(OffsetKey.self) { (value : OffsetKey.Value) in
-                        scrollHeight = value
-                        print(value ?? "none")
-                    }
-                    VStack {
-                        ForEach(0..<30) { num in
-                            GroupBox {
-                                VStack {
-                                    Text("test")
-                                        .bold()
-                                        
-                                    Text("\(num)")
-                                        .foregroundColor(.secondary)
-                                }
-                            } label: {
-                                Text("test").font(.title2)
-                            }
-                            .padding(.top, 5)
-                            .shadow(radius: 10)
-                        }
-                        
-                    }
-                    .padding(.top, 180 - getHeight())
-                }
+                
                 
                 GeometryReader { geoProxy in
-                    VStack(spacing: 0) {
+                    
+                    ScrollView {
+//                        GeometryReader { geoProxy in
+//                            Color.clear.preference(key: OffsetKey.self, value: geoProxy.frame(in: .global).origin.y)
+//                                .frame(height: 0)
+//
+//
+//                        }.onPreferenceChange(OffsetKey.self) { (value : OffsetKey.Value) in
+//                            scrollHeight = value
+//    //                        print(value ?? "none")
+//                        }
+//                        .frame(height: 0)
                         
+//                        Color.clear
+//                            .frame(height: 0)
+//                            .frame(maxHeight: 0)
+//                            .padding(0)
+//                            .background(GeometryReader { gp -> Color in
+//                            DispatchQueue.main.async {
+//                                self.scrollHeight = gp.frame(in: .global).origin.y
+//                                print("Search height \(gp.frame(in: .global).origin.y)")
+//                            }
+//
+//                                return Color.clear
+//
+//                        })
                         
-                        Text("Search").font(.title)
-                            .bold()
+                        ForEach(0..<30) { num in
+                            GroupBox {
+                                Text("\(num)")
+                            } label: {
+                                Text("Tets")
+                            }
+                                
+                                
                             
-                        VStack {
-                            ZStack {
-                                HStack {
-                                    Image(systemName: "magnifyingglass")
+                            
+                        }
+                        .offset(y : 150)
+                        
+                        
+                        VStack(spacing: 0) {
+                            
+                            VStack(spacing: 0) {
+                                Text("Search").font(.title)
+                                    .bold()
+                                    .padding(.top, 25)
+                                GeometryReader { gProxy in
                                     
-                                    TextField("Search", text: $searchTerm).onSubmit {
-                                        guard searchTerm.isEmpty == false else { return }
+                                    VStack {
                                         
-                                        viewModel.searchTerms.insert(SearchItem(text: searchTerm, index: viewModel.searchTerms.count))
+                                        
+                                        VStack {
+                                            ZStack {
+                                                HStack {
+                                                    Image(systemName: "magnifyingglass")
+                                                    
+                                                    TextField("Search", text: $searchTerm)
+                                                        .onSubmit {
+                                                            guard searchTerm.isEmpty == false else { return }
+                                                            
+                                                            viewModel.searchTerms.insert(SearchItem(text: searchTerm, index: viewModel.searchTerms.count))
+                                                        }
+                                                        .lineLimit(1)
+                                                    
+                                                }
+                                                .padding(.bottom, (((headerHeight ?? 0) - (searchFieldHeight ?? 0) - (ingredientsHeight ?? 0)) / 2))
+                                                .underlineTextField()
+                                                .background(GeometryReader { gp -> Color in
+                                                    DispatchQueue.main.async {
+                                                        self.searchFieldHeight = gp.size.height
+                                                        print("Search height \(gp.size.height)")
+                                                    }
+                                                    
+                                                    return Color.clear
+                                                })
+                                                
+                                            }
+                                            //                                .padding()
+                                            //                                .background(Color(.systemGray5), alignment: .center)
+                                        }
+                                        
+                                        
+                                        if viewModel.searchTerms.count > 0 {
+                                            
+                                            GeometryReader { searchProxy in
+                                                SearchItemsView()
+                                                    .padding([.leading], 10)
+                                                    .background(GeometryReader { gp -> Color in
+                                                        DispatchQueue.main.async {
+                                                            print("Ingredient height \(gp.size.height)")
+                                                            self.ingredientsHeight = gp.size.height
+                                                        }
+                                                        
+                                                        return Color.clear
+                                                    })
+                                            }
+                                        }
                                     }
+                                    
+                                    
+                                    
+                                    Color.clear.preference(key: HeaderKey.self, value: gProxy.frame(in: .global).height)
+                                        .frame(height: 0)
                                 }
                             }
-                            .padding()
-                            .background(Color(.systemGray5), alignment: .center)
-                        }.padding([.leading, .trailing])
-                            .padding(.bottom, 5)
-                        
-                        if viewModel.searchTerms.count > 0 {
-                            SearchItemsView().padding([.leading])
+                            
+                            .background(GeometryReader { gp -> Color in
+                                DispatchQueue.main.async {
+                                    print("Ingredient height \(gp.size.height)")
+                                    self.scrollHeight = gp.frame(in: .global).maxY
+                                    print("SH \(String(describing: self.scrollHeight))")
+                                }
+                                
+                                return Color.clear
+                            })
+                            
+                            .frame(maxWidth: .infinity)
+                            .frame(height: CGFloat(150) - getHeight())
+                            .offset(x: 0, y : self.getHeaderOffset())
+                            .background(Color.orange.opacity(0.25))
+                            
+                            
+                            
+                            
                         }
-                        
-                        
-                            
-                            
-                        Color.clear.preference(key: HeaderKey.self, value: geoProxy.frame(in: .global).maxY)
-                            .frame(height: 0)
+//                        .edgesIgnoringSafeArea(.all)
+//                        .padding(.top, CGFloat(150) - getHeight())
+//                        .background(GeometryReader { gp -> Color in
+//                        DispatchQueue.main.async {
+//                            self.scrollHeight = gp.frame(in: .global).origin.y
+//                            print("Search height \(gp.frame(in: .global).origin.y)")
+//                        }
+//
+//                            return Color.clear
+//
+//                    })
                     }
-                    .frame(maxWidth: .infinity)
-                    .frame(height: 150 - getHeight())
-                    .background(Color.orange.opacity(0.25))
+                    
+                    
                     
                     
                     
                 }.onPreferenceChange(HeaderKey.self) { (value : OffsetKey.Value) in
                     headerHeight = value
-                    print(value ?? "none")
+//                    print(value ?? "none")
                 }
                 
             }
@@ -101,8 +181,24 @@ struct SearchTestView: View {
         
     }
     
-    func getHeight() -> CGFloat {
+    func getHeaderOffset() -> CGFloat {
         if let scrollHeight = scrollHeight {
+            
+            
+            if scrollHeight < 150 {
+                return abs(scrollHeight)
+            } else {
+                return (CGFloat(-1) * (scrollHeight - CGFloat(150)))
+            }
+        }
+        
+        return CGFloat(0)
+    }
+    
+    func getHeight() -> CGFloat {
+        print("header height \(String(describing: headerHeight?.description))")
+        if let scrollHeight = scrollHeight {
+            print(scrollHeight.description)
             let x = Float(scrollHeight)
             if x <= 0 && x >= -70 {
                 return CGFloat(abs(x))
@@ -129,6 +225,17 @@ struct SearchTestView: View {
     }
 }
 
+extension View {
+    func underlineTextField() -> some View {
+        self
+//            .padding(.vertical, 10)
+            .overlay(Rectangle().frame(height: 2).padding(.top, 35))
+            .foregroundColor(.black)
+            .padding([.leading,.trailing,.top], 10)
+//            .padding(.v)
+            
+    }
+}
 struct OffsetKey: PreferenceKey {
     static let defaultValue: CGFloat? = nil
     static func reduce(value: inout CGFloat?, nextValue: () -> CGFloat?) {
