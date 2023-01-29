@@ -19,7 +19,8 @@ struct ContentView: View {
 //            Login()
 //        }
         
-        SearchTestView().environmentObject(SearchViewModel())
+//        SearchTestView().environmentObject(SearchViewModel())
+        SearchView().environmentObject(SearchViewModel())
     }
 }
 

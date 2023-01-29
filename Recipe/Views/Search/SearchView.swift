@@ -6,95 +6,40 @@
 //
 
 import SwiftUI
+import FirebaseFirestore
+import FirebaseFirestoreCombineSwift
+import Combine
 
 struct SearchView: View {
-    
-//    @EnvironmentObject var recipeList : RecipeList
-    @EnvironmentObject var viewModel : SearchViewModel
-    
-    @State private var currentTerm : String = ""
-    
-    
-    var body: some View {
-        
-        ScrollView {
-            ZStack {
-                VStack {
-                    ForEach(0..<30) { item in
-                        GroupBox {
-                            
-                            VStack(alignment: .leading) {
-                                Text("Jacqueline \(item)")
-                                
-                            }
-                            
-                            
-                            
-                        } label: {
-                            Text("Item").font(.title2)
-                        }
-                    }
-                }
-                .padding(.top, 180)
+    @ObservedObject var viewModel = SearchViewModel()
+    @State private var newSearchTerm = ""
 
-//                GeometryReader { geoProxy in
-//                    SearchHeaderView(searchTerm: $currentTerm)
-//                }
-//                .frame(maxWidth: .infinity)
-//                .frame(height: self.)
-                
-                GeometryReader { geoProxy in
-                    VStack {
-                        Text("Search").font(.title2).bold()
-                        SearchHeaderView(searchTerm: $currentTerm)
-                    }
-                    .frame(maxWidth: .infinity)
-                    .frame(height: self.getHeight(minHeight: 180,
-                                                        maxHeight: 180,
-                                                        yOffset: geoProxy.frame(in: .global).origin.y))
+    var body: some View {
+        VStack {
+            HStack {
+                TextField("Enter search term", text: $newSearchTerm)
                     
-                    .background(Color.orange.opacity(0.95))
-                    .offset(y: (geoProxy.frame(in: .global).origin.y < 0 ? abs(geoProxy.frame(in: .global).origin.y) : -geoProxy.frame(in: .global).origin.y))
+                Button(action: {
+                    if !self.newSearchTerm.isEmpty {
+                        self.viewModel.searchTerms.append(self.newSearchTerm.lowercased())
+                        self.newSearchTerm = ""
+                    }
+                    
+                }) {
+                    Text("Add")
                 }
-            
-            
+            }
+            List(viewModel.searchTerms, id: \.self) { term in
+                Text(term)
+            }
+            List(viewModel.documents, id: \.documentID) { document in
+                Text(document.data()?["name"] as? String ?? "")
+            }
         }
-        .edgesIgnoringSafeArea(.vertical)
-            
-        }
-        //.searchable(text: $currentTerm, placement: .toolbar)
-        
-        
-//        NavigationView {
-//            ScrollView {
-//                VStack {
-//                    SearchItemsView()
-//
-//                    LazyVStack {
-//                        ForEach(0..<100) { number in
-//                            Text("\(number)")
-//                        }
-//                    }
-//                }
-//            }
-//        }.searchable(text: $currentTerm)
-        
-//            Text("dang")
-            
-        
-        
-    }
-    
-    func getHeight(minHeight: CGFloat, maxHeight: CGFloat, yOffset: CGFloat) -> CGFloat {
-        // scrolling up
-        if maxHeight + yOffset < minHeight {
-            return minHeight
-        }
-        
-        // scrolling down
-        return maxHeight + yOffset
     }
 }
+
+
 
 struct SearchView_Previews: PreviewProvider {
     static var previews: some View {

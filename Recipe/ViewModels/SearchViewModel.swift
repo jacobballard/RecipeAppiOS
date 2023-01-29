@@ -12,20 +12,52 @@ import FirebaseFirestoreCombineSwift
 
 class SearchViewModel : ObservableObject {
 
-
-    @Published var searchTerms  : Set<SearchItem> = Set<SearchItem>()
+    @Published var documents: [DocumentSnapshot] = []
+    
+    @Published var searchTerms  : [String] = []
 
     @Published var list : [Recipe]?
 
     private var db = Firestore.firestore()
 
-    private var bag = Set<AnyCancellable>()
+    private var cancellable : Set<AnyCancellable> = Set<AnyCancellable>()
+    
+   
     
     init(list: [Recipe]? = nil) {
         self.searchTerms = searchTerms
         self.list = list
+        
+        $searchTerms
+                    .removeDuplicates()
+                    .debounce(for: .milliseconds(500), scheduler: DispatchQueue.main)
+                    .sink { terms in
+                        self.fetchData()
+                    }
+                    .store(in: &cancellable)
     }
 
+    func fetchData() {
+        var query : Query = db.collection("recipes")
+        
+        print("terms")
+        print(searchTerms)
+        query = query.whereField("plain_ingredients", arrayContains: searchTerms)
+        
+        query.addSnapshotListener { (snapshot, error) in
+            if let error = error {
+                print("bob")
+                print(error)
+            } else {
+                
+                self.documents = snapshot?.documents ?? []
+                print(self.documents.description)
+            }
+        }
+    }
+
+
+    
     // Get subset of recipes
     func search_recipes(contains : [String] ) {
 
@@ -69,7 +101,7 @@ class SearchViewModel : ObservableObject {
 
             self.list = recipes
         }
-        .store(in: &bag)
+        .store(in: &cancellable)
         
         
 

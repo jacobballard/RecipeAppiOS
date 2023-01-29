@@ -11,7 +11,8 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 
 
-final class Recipe : Codable, ObservableObject, Identifiable {
+final class Recipe : Codable, ObservableObject, Identifiable, Hashable {
+    
 
     @DocumentID var id : String?
     
@@ -63,6 +64,14 @@ final class Recipe : Codable, ObservableObject, Identifiable {
         try container.encode(tags, forKey: .tags)
         try container.encode(image, forKey: .image)
         
+    }
+    
+    static func == (lhs: Recipe, rhs: Recipe) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+            hasher.combine(id)
     }
 }
 
