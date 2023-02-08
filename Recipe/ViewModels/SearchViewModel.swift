@@ -31,30 +31,69 @@ class SearchViewModel : ObservableObject {
         $searchTerms
                     .removeDuplicates()
                     .debounce(for: .milliseconds(500), scheduler: DispatchQueue.main)
-                    .sink { terms in
-                        self.fetchData()
-                    }
+                    .sink(receiveValue: { val in
+                        print("Dobences? \(val)")
+                        self.fetchData { docs in
+                            print("Yay \(docs)")
+                        }
+                        self.search_recipes(contains: self.searchTerms)
+                        
+                    })
+                    
                     .store(in: &cancellable)
     }
+    
+    func queryWithFilters(filters: [String]) -> Query {
+        var query : Query = Firestore.firestore().collection("recipes")
 
-    func fetchData() {
-        var query : Query = db.collection("recipes")
-        
-        print("terms")
-        print(searchTerms)
-        query = query.whereField("plain_ingredients", arrayContains: searchTerms)
-        
-        query.addSnapshotListener { (snapshot, error) in
-            if let error = error {
-                print("bob")
-                print(error)
-            } else {
-                
-                self.documents = snapshot?.documents ?? []
-                print(self.documents.description)
-            }
-        }
+      for filter in filters {
+          query = query.whereField("plain_ingredients", arrayContains: filter)
+      }
+
+      return query
     }
+
+    func fetchData(completion: @escaping ([DocumentSnapshot]) -> Void) {
+      let query = queryWithFilters(filters: searchTerms)
+
+      query.getDocuments { (querySnapshot, error) in
+        if let error = error {
+          print("Error getting documents: \(error)")
+          completion([])
+          return
+        }
+
+        completion(querySnapshot!.documents)
+      }
+    }
+//    func fetchData() {
+//        var query : Query = db.collection("recipes")
+//
+//
+//        print("terms")
+//        print(searchTerms)
+////        query = query.whereField("plain_ingredients", arrayContains: searchTerms)
+//
+//        for term in searchTerms {
+//            query = query.whereField("plain_ingredients", arrayContains: term)
+//        }
+//
+//        query.getDocuments { (snapshot, error) in
+//
+//        }
+//
+//
+//        query.addSnapshotListener { (snapshot, error) in
+//            if let error = error {
+//                print("bob")
+//                print(error)
+//            } else {
+//
+//                self.documents = snapshot?.documents ?? []
+//                print(self.documents.description)
+//            }
+//        }
+//    }
 
 
     
@@ -82,7 +121,7 @@ class SearchViewModel : ObservableObject {
         // More clear?
         db
         .collection("recipes")
-        .whereField("ingredients", arrayContains: contains)
+        .whereField("plain_ingredients", arrayContains: contains)
         .snapshotPublisher()
         .map { querySnapshot in
             querySnapshot.documents.compactMap { document in
@@ -98,8 +137,9 @@ class SearchViewModel : ObservableObject {
             }
         } receiveValue: { [weak self] recipes in
             guard let self = self else { return }
-
+            print("receive Value \(recipes)")
             self.list = recipes
+            print(self.list ?? [])
         }
         .store(in: &cancellable)
         

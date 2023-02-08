@@ -20,7 +20,7 @@ struct ContentView: View {
 //        }
         
 //        SearchTestView().environmentObject(SearchViewModel())
-        SearchView().environmentObject(SearchViewModel())
+        Search().environmentObject(SearchViewModel())
     }
 }
 
